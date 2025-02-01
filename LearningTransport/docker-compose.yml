@@ -6,6 +6,8 @@ services:
       - env/service-platform.env
     ports:
       - "33333:33333"
+    volumes:
+      - /Users/mauroservienti/temp/.learningtransport:/var/lib/.learningtransport
     environment:
       RAVENDB_CONNECTIONSTRING: http://servicecontrol-db:8080
       REMOTEINSTANCES: '[{"api_uri":"http://servicecontrol-audit:44444/api"}]'
@@ -37,6 +39,8 @@ services:
       - env/service-platform.env
     ports:
       - "44444:44444"
+    volumes:
+      - /Users/mauroservienti/temp/.learningtransport:/var/lib/.learningtransport
     environment:
       RAVENDB_CONNECTIONSTRING: http://servicecontrol-db:8080
     command: --setup-and-run
@@ -56,6 +60,8 @@ services:
     command: --setup-and-run
     ports:
       - "33633:33633"
+    volumes:
+      - /Users/mauroservienti/temp/.learningtransport:/var/lib/.learningtransport
     dns:
       - 10.0.3.20
     networks:

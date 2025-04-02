@@ -1,4 +1,4 @@
-name: particular-platform
+name: particular-platform-learning-transport
 services:
   servicecontrol:
     image: particular/servicecontrol:latest

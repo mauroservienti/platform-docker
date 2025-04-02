@@ -19,10 +19,6 @@ services:
       retries: 10
       start_period: 10s
       timeout: 3s
-    dns:
-      - 10.0.3.20
-    networks:
-      - platform
   servicecontrol:
     image: particular/servicecontrol:latest
     env_file:
@@ -41,10 +37,7 @@ services:
         condition: service_healthy
       sql:
         condition: service_healthy
-    dns:
-      - 10.0.3.20
-    networks:
-      - platform
+
   servicecontrol-db:
     image: particular/servicecontrol-ravendb:latest
     ports:
@@ -52,10 +45,7 @@ services:
     volumes:
       - servicecontrol-db:/var/lib/ravendb/data
       - servicecontrol-db-config:/var/lib/ravendb/config
-    dns:
-      - 10.0.3.20
-    networks:
-      - platform
+
   servicecontrol-audit:
     image: particular/servicecontrol-audit:latest
     env_file:
@@ -71,10 +61,7 @@ services:
         condition: service_healthy
       sql:
         condition: service_healthy
-    dns:
-      - 10.0.3.20
-    networks:
-      - platform
+
   servicecontrol-monitoring:
     image: particular/servicecontrol-monitoring:latest
     env_file:
@@ -83,13 +70,10 @@ services:
     command: --setup-and-run
     ports:
       - "33633:33633"
-    dns:
-      - 10.0.3.20
-    networks:
-      - platform
     depends_on:
       sql:
         condition: service_healthy
+
   servicepulse:
     image: particular/servicepulse:latest
     ports:
@@ -102,14 +86,7 @@ services:
       servicecontrol:
         condition: service_healthy
       servicecontrol-monitoring:
-        condition: service_healthy
-    networks:
-      - platform
-networks:
-  platform:
-    ipam:
-      config:
-        - subnet: 10.0.3.0/24
+
 volumes:
   servicecontrol-db:
   servicecontrol-db-config:
